@@ -180,8 +180,6 @@ namespace PorositySimulation
         {
             int height = 10;
             int width = 10;
-
-            Console.WriteLine("Input porosity");
             int porosity = POROSITY;
 
             var simm = new SimulationOfPorosityCluster(width, height, porosity);
