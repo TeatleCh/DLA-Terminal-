@@ -28,13 +28,13 @@ namespace PorositySimulation
         {
             int x = random.Next(0, width);
             int y = random.Next(0, height);
-            
+
             while (field[y, x] != 0)
             {
                 x = random.Next(0, width);
                 y = random.Next(0, height);
             }
-            
+
             field[y, x] = 1;
         }
 
@@ -48,22 +48,22 @@ namespace PorositySimulation
                     {
                         int dx = random.Next(-1, 2);
                         int dy = random.Next(-1, 2);
-                        
+
                         field[y, x] = 0;
-                        
+
                         int newX = x + dx;
                         int newY = y + dy;
-                        
+
                         if (newX >= width)
                             newX = width - 1;
                         else if (newX < 0)
                             newX = 0;
-                            
+
                         if (newY >= height)
                             newY = height - 1;
                         else if (newY < 0)
                             newY = 0;
-                            
+
                         if (field[newY, newX] == 0)
                             field[newY, newX] = 1;
                         else
@@ -76,7 +76,7 @@ namespace PorositySimulation
         public int RunTransitionRule()
         {
             int massOfCluster = 0;
-            
+
             for (int y = 0; y < height; y++)
             {
                 for (int x = 0; x < width; x++)
@@ -89,17 +89,17 @@ namespace PorositySimulation
                             {
                                 int newX = x + dx;
                                 int newY = y + dy;
-                                
+
                                 if (newX >= width)
                                     newX = width - 1;
                                 else if (newX < 0)
                                     newX = 0;
-                                    
+
                                 if (newY >= height)
                                     newY = height - 1;
                                 else if (newY < 0)
                                     newY = 0;
-                                    
+
                                 if (field[newY, newX] == 2)
                                     field[y, x] = 2;
                             }
@@ -107,7 +107,7 @@ namespace PorositySimulation
                     }
                 }
             }
-            
+
             for (int y = 0; y < height; y++)
             {
                 for (int x = 0; x < width; x++)
@@ -116,7 +116,7 @@ namespace PorositySimulation
                         massOfCluster++;
                 }
             }
-            
+
             return massOfCluster;
         }
 
@@ -130,7 +130,7 @@ namespace PorositySimulation
                 }
                 Console.WriteLine();
             }
-            Console.WriteLine();   
+            Console.WriteLine();
         }
 
         public bool NeedContinue()
@@ -154,12 +154,13 @@ namespace PorositySimulation
                 choice = 1;
             }
             if (choice == 1)
-            {;
+            {
+                ;
                 int no = 1;
-                
+
                 for (int i = 0; i < no; i++)
                     InitializeParticle();
-                    
+
                 MoveParticle();
                 RunTransitionRule();
                 PrintField();
@@ -179,21 +180,21 @@ namespace PorositySimulation
         {
             int height = 10;
             int width = 10;
-            
+
             Console.WriteLine("Input porosity");
             int porosity = POROSITY;
-            
+
             var simm = new SimulationOfPorosityCluster(width, height, porosity);
             simm.Initialize();
             int no = 1;
-            
+
             for (int i = 0; i < no; i++)
                 simm.InitializeParticle();
-                
+
             simm.MoveParticle();
             simm.RunTransitionRule();
             simm.PrintField();
-            
+
             while (simm.NeedContinue()) { }
         }
     }
