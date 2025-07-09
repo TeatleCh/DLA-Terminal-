@@ -149,7 +149,7 @@ namespace PorositySimulation
             }
             int actualPorosity = 100-(needToContinue / (height * width) * 100);
             int choice = 0;
-            if (actualPorosity < porosity)
+            if (actualPorosity > porosity)
             {
                 choice = 1;
             }
